@@ -16,7 +16,7 @@ enum LeftMenuType{
 class SwitchCell:UITableViewCell{
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var control: UISwitch!
-  var onChange:((_ on:Bool)->Void)?
+  @objc var onChange:((_ on:Bool)->Void)?
   @IBAction func switchChanged(_ sender: UISwitch) {
     onChange?(sender.isOn)
   }
@@ -25,7 +25,7 @@ class SliderCell:UITableViewCell{
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var slider: UISlider!
   
-  var onChange:((_ value:Float)->Void)?
+  @objc var onChange:((_ value:Float)->Void)?
   @IBAction func sliderChanged(_ sender: UISlider) {
     onChange?(sender.value)
   }
@@ -34,11 +34,11 @@ class SegmentCell:UITableViewCell{
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var segment: UISegmentedControl!
   
-  var values:[Any] = []
-  var onChange:((_ value:Any)->Void)?
+  @objc var values:[Any] = []
+  @objc var onChange:((_ value:Any)->Void)?
 
   @IBAction func segmentChanged(_ sender: UISegmentedControl) {
-    onChange?(value: values[sender.selectedSegmentIndex])
+    onChange?(values[sender.selectedSegmentIndex])
   }
 }
 class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate {

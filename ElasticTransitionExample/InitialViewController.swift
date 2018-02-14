@@ -11,9 +11,9 @@ import UIKit
 class InitialViewController: UIViewController {
   
   
-  var transition = ElasticTransition()
-  let lgr = UIScreenEdgePanGestureRecognizer()
-  let rgr = UIScreenEdgePanGestureRecognizer()
+  @objc var transition = ElasticTransition()
+  @objc let lgr = UIScreenEdgePanGestureRecognizer()
+  @objc let rgr = UIScreenEdgePanGestureRecognizer()
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -35,7 +35,7 @@ class InitialViewController: UIViewController {
     view.addGestureRecognizer(rgr)
   }
   
-  func handlePan(_ pan:UIPanGestureRecognizer){
+  @objc func handlePan(_ pan:UIPanGestureRecognizer){
     if pan.state == .began{
       transition.edge = .left
       transition.startInteractiveTransition(self, segueIdentifier: "menu", gestureRecognizer: pan)
@@ -45,7 +45,7 @@ class InitialViewController: UIViewController {
     }
   }
   
-  func handleRightPan(_ pan:UIPanGestureRecognizer){
+  @objc func handleRightPan(_ pan:UIPanGestureRecognizer){
     if pan.state == .began{
       transition.edge = .right
       transition.startInteractiveTransition(self, segueIdentifier: "about", gestureRecognizer: pan)

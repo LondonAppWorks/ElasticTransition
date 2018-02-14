@@ -18,13 +18,13 @@ internal class MotionAnimationPropertyState:NSObject, MotionAnimationDelegate{
   var velocityUpdateCallbacks:[UUID:MotionAnimationValueObserver] = [:]
   var valueUpdateCallbacks:[UUID:MotionAnimationValueObserver] = [:]
 
-  var animation:MotionAnimation?
+  @objc var animation:MotionAnimation?
 
   fileprivate var getter:CGFloatValueBlock?
   fileprivate var setter:CGFloatValueBlock?
   fileprivate var values:[CGFloat]?
 
-  init(values:[CGFloat]){
+  @objc init(values:[CGFloat]){
     self.values = values
   }
 
@@ -78,27 +78,27 @@ internal class MotionAnimationPropertyState:NSObject, MotionAnimationDelegate{
     anim.target = toValues
   }
 
-  func stop() {
+  @objc func stop() {
     animation?.stop()
   }
 
-  func addVelocityUpdateCallback(_ velocityUpdateCallback:@escaping MotionAnimationValueObserver) -> MotionAnimationObserverKey{
+  @objc func addVelocityUpdateCallback(_ velocityUpdateCallback:@escaping MotionAnimationValueObserver) -> MotionAnimationObserverKey{
     let uuid = UUID()
     self.velocityUpdateCallbacks[uuid] = velocityUpdateCallback
     return uuid
   }
 
-  func addValueUpdateCallback(_ valueUpdateCallback:@escaping MotionAnimationValueObserver) -> MotionAnimationObserverKey{
+  @objc func addValueUpdateCallback(_ valueUpdateCallback:@escaping MotionAnimationValueObserver) -> MotionAnimationObserverKey{
     let uuid = UUID()
     self.valueUpdateCallbacks[uuid] = valueUpdateCallback
     return uuid
   }
 
-  func removeCallback(_ key:MotionAnimationObserverKey) -> MotionAnimationValueObserver? {
+  @objc func removeCallback(_ key:MotionAnimationObserverKey) -> MotionAnimationValueObserver? {
     return self.valueUpdateCallbacks.removeValue(forKey: key as UUID) ?? self.velocityUpdateCallbacks.removeValue(forKey: key as UUID)
   }
 
-  internal func setValues(_ values:[CGFloat]){
+  @objc internal func setValues(_ values:[CGFloat]){
     var values = values
     if let setter = setter{
         setter(&values)
@@ -107,7 +107,7 @@ internal class MotionAnimationPropertyState:NSObject, MotionAnimationDelegate{
     }
   }
 
-  internal func animationDidStop(_ animation:MotionAnimation){
+  @objc internal func animationDidStop(_ animation:MotionAnimation){
     _tempValueUpdate = nil
     _tempVelocityUpdate = nil
     if let _tempCompletion = _tempCompletion{
@@ -116,7 +116,7 @@ internal class MotionAnimationPropertyState:NSObject, MotionAnimationDelegate{
     }
   }
 
-  internal func animationDidPerformStep(_ animation:MotionAnimation){
+  @objc internal func animationDidPerformStep(_ animation:MotionAnimation){
     let animation = animation as! SpringValueAnimation
     if velocityUpdateCallbacks.count > 0 || _tempVelocityUpdate != nil{
       let v = animation.velocity

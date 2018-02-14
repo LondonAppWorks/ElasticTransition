@@ -64,7 +64,7 @@ public class ElasticTransition: EdgePanTransition, UIGestureRecognizerDelegate{
    lower radiusFactor means higher curvature
    value is clamped between 0 to 0.5
    */
-  public var radiusFactor:CGFloat = 0.5
+  @objc public var radiusFactor:CGFloat = 0.5
 
   /**
    The curvature of the elastic edge in interactive transition
@@ -77,7 +77,7 @@ public class ElasticTransition: EdgePanTransition, UIGestureRecognizerDelegate{
 
    **Only effective when doing a interactive transition**
    */
-  public var sticky:Bool = true
+  @objc public var sticky:Bool = true
 
   /**
    The initial position of the simulated drag when static animation is performed
@@ -96,7 +96,7 @@ public class ElasticTransition: EdgePanTransition, UIGestureRecognizerDelegate{
    UIColor(red: 152/255, green: 174/255, blue: 196/255, alpha: 1.0)
    ```
    */
-  public var containerColor:UIColor = UIColor(red: 152/255, green: 174/255, blue: 196/255, alpha: 1.0)
+  @objc public var containerColor:UIColor = UIColor(red: 152/255, green: 174/255, blue: 196/255, alpha: 1.0)
 
   /**
    The color of the overlay when doing the transition
@@ -106,14 +106,14 @@ public class ElasticTransition: EdgePanTransition, UIGestureRecognizerDelegate{
    UIColor(red: 152/255, green: 174/255, blue: 196/255, alpha: 0.5)
    ```
    */
-  public var overlayColor:UIColor = UIColor(red: 152/255, green: 174/255, blue: 196/255, alpha: 0.5)
+  @objc public var overlayColor:UIColor = UIColor(red: 152/255, green: 174/255, blue: 196/255, alpha: 0.5)
 
   /**
    Whether or not to display the shadow. Will decrease performance.
 
    default: false
    */
-  public var showShadow:Bool = false
+  @objc public var showShadow:Bool = false
   /**
    The shadow color of the container when doing the transition
 
@@ -122,7 +122,7 @@ public class ElasticTransition: EdgePanTransition, UIGestureRecognizerDelegate{
    UIColor(red: 100/255, green: 122/255, blue: 144/255, alpha: 1.0)
    ```
    */
-  public var shadowColor:UIColor = UIColor(red: 100/255, green: 122/255, blue: 144/255, alpha: 1.0)
+  @objc public var shadowColor:UIColor = UIColor(red: 100/255, green: 122/255, blue: 144/255, alpha: 1.0)
 
   /**
    The shadow color of the container when doing the transition
@@ -132,7 +132,7 @@ public class ElasticTransition: EdgePanTransition, UIGestureRecognizerDelegate{
    UIColor(red: 100/255, green: 122/255, blue: 144/255, alpha: 1.0)
    ```
    */
-  public var frontViewBackgroundColor:UIColor?
+  @objc public var frontViewBackgroundColor:UIColor?
   /**
    The shadow radius of the container when doing the transition
 
@@ -141,10 +141,10 @@ public class ElasticTransition: EdgePanTransition, UIGestureRecognizerDelegate{
    50
    ```
    */
-  public var shadowRadius:CGFloat = 50
+  @objc public var shadowRadius:CGFloat = 50
 
   // custom transform function
-  public var transform:((_ progress:CGFloat, _ view:UIView) -> Void)?
+  @objc public var transform:((_ progress:CGFloat, _ view:UIView) -> Void)?
 
   // Transform Type
   public var transformType:ElasticTransitionBackgroundTransform = .translateMid{
@@ -156,43 +156,43 @@ public class ElasticTransition: EdgePanTransition, UIGestureRecognizerDelegate{
   }
 
   // track using translation or direct touch position
-  public var useTranlation = true
+  @objc public var useTranlation = true
 
 
   // damping
-  public var damping:CGFloat = 0.2{
+  @objc public var damping:CGFloat = 0.2{
     didSet{
       damping = min(1.0, max(0.0, damping))
     }
   }
 
   // damping
-  public var stiffness:CGFloat = 0.2{
+  @objc public var stiffness:CGFloat = 0.2{
     didSet{
       stiffness = min(1.0, max(0.0, stiffness))
     }
   }
 
   // track using translation or direct touch position
-  public var shouldAddGestureRecognizers = true
+  @objc public var shouldAddGestureRecognizers = true
 
-  var cc:DynamicItem!
-  var lc:DynamicItem!
-  var animationCenterStiffness:CGFloat {
+  @objc var cc:DynamicItem!
+  @objc var lc:DynamicItem!
+  @objc var animationCenterStiffness:CGFloat {
     return (stiffness + 0.5) * (interactive ? 300 : 180)
   }
-  var animationSideStiffness:CGFloat {
+  @objc var animationSideStiffness:CGFloat {
     return (stiffness + 0.5) * (interactive ? 200 : 140)
   }
-  var animationThreshold:CGFloat {
+  @objc var animationThreshold:CGFloat {
     return interactive ? 0.1 : 0.5
   }
-  var animationDamping:CGFloat {
+  @objc var animationDamping:CGFloat {
     return (damping + 0.5) * (interactive ? 30 : 20)
   }
-  var contentLength:CGFloat = 0
-  var lastPoint:CGPoint = CGPoint.zero
-  var stickDistance:CGFloat{
+  @objc var contentLength:CGFloat = 0
+  @objc var lastPoint:CGPoint = CGPoint.zero
+  @objc var stickDistance:CGFloat{
     return sticky ? contentLength * panThreshold : 0
   }
 
@@ -210,7 +210,7 @@ public class ElasticTransition: EdgePanTransition, UIGestureRecognizerDelegate{
     }
   }
 
-  func translatedPoint() -> CGPoint{
+  @objc func translatedPoint() -> CGPoint{
     let initialPoint = self.finalPoint(!self.presenting)
     switch edge{
     case .left, .right:
@@ -221,9 +221,9 @@ public class ElasticTransition: EdgePanTransition, UIGestureRecognizerDelegate{
   }
 
 
-  var pushedControllers:[UIViewController] = []
-  var backgroundExitPanGestureRecognizer = UIPanGestureRecognizer()
-  var foregroundExitPanGestureRecognizer = UIPanGestureRecognizer()
+  @objc var pushedControllers:[UIViewController] = []
+  @objc var backgroundExitPanGestureRecognizer = UIPanGestureRecognizer()
+  @objc var foregroundExitPanGestureRecognizer = UIPanGestureRecognizer()
 
   public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
     if transitioning{
@@ -279,19 +279,19 @@ public class ElasticTransition: EdgePanTransition, UIGestureRecognizerDelegate{
     return false;
   }
 
-  var foregroundScrollView:Scrollable?
-  var foregroundExitStarted:Bool {
+  @objc var foregroundScrollView:Scrollable?
+  @objc var foregroundExitStarted:Bool {
      return foregroundStartingLocation != nil
   }
   var foregroundStartingLocation:CGPoint?
 
-  func shouldForegroundDismiss() -> Bool{
+  @objc func shouldForegroundDismiss() -> Bool{
     if let vc = pushedControllers.last, let delegate = vc as? ElasticMenuTransitionDelegate {
       return delegate.dismissByForegroundDrag ?? false
     }
     return false
   }
-  func handleForegroundOffstagePan(_ pan: UIPanGestureRecognizer){
+  @objc func handleForegroundOffstagePan(_ pan: UIPanGestureRecognizer){
     if let vc = pushedControllers.last{
       switch (pan.state) {
       case .began, .changed:
@@ -325,7 +325,7 @@ public class ElasticTransition: EdgePanTransition, UIGestureRecognizerDelegate{
     }
   }
 
-  func handleOffstagePan(_ pan: UIPanGestureRecognizer){
+  @objc func handleOffstagePan(_ pan: UIPanGestureRecognizer){
     if let vc = pushedControllers.last{
       switch (pan.state) {
       case UIGestureRecognizerState.began:
@@ -336,8 +336,8 @@ public class ElasticTransition: EdgePanTransition, UIGestureRecognizerDelegate{
     }
   }
 
-  var animationObserverKey:MotionAnimationObserverKey!
-  var needUpdate = false
+  @objc var animationObserverKey:MotionAnimationObserverKey!
+  @objc var needUpdate = false
   public override init(){
     super.init()
 
@@ -389,7 +389,7 @@ public class ElasticTransition: EdgePanTransition, UIGestureRecognizerDelegate{
     lc.m_animate("center", to: lcToPoint, stiffness: animationSideStiffness, damping: animationDamping, threshold: animationThreshold)
   }
 
-  func updateShape(){
+  @objc func updateShape(){
     if !transitioning{
       return
     }
@@ -470,7 +470,7 @@ public class ElasticTransition: EdgePanTransition, UIGestureRecognizerDelegate{
   }
 
 
-  public func manuallyPushed(_ viewController:UIViewController){
+  @objc public func manuallyPushed(_ viewController:UIViewController){
     if shouldAddGestureRecognizers{
       viewController.view.addGestureRecognizer(foregroundExitPanGestureRecognizer)
     }

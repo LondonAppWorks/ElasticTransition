@@ -69,7 +69,7 @@ public protocol MotionAnimatableProperty{
 }
 
 extension UIColor:MotionAnimatableProperty{
-  public var CGFloatValues:[CGFloat] {
+  @objc public var CGFloatValues:[CGFloat] {
     var r : CGFloat = 0
     var g : CGFloat = 0
     var b : CGFloat = 0
@@ -77,11 +77,17 @@ extension UIColor:MotionAnimatableProperty{
     self.getRed(&r, green: &g, blue: &b, alpha: &a)
     return [r,g,b,a]
   }
-  public static func fromCGFloatValues(_ values: [CGFloat]) -> Self {
+  @objc public static func fromCGFloatValues(_ values: [CGFloat]) -> Self {
     return self.init(red: values[0], green: values[1], blue: values[2], alpha: values[3])
   }
   public func toCGFloatValues(_ values: inout [CGFloat]) {
-    self.getRed(&values[0], green: &values[1], blue: &values[2], alpha: &values[3])
+    var values0 = values[0]
+    var values1 = values[1]
+    var values2 = values[2]
+    var values3 = values[3]
+    
+    self.getRed(&values0, green: &values1, blue: &values2, alpha: &values3)
+    values = [values0, values1, values2, values3]
   }
 }
 

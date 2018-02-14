@@ -27,7 +27,7 @@
 import UIKit
 import MotionAnimation
 
-let π:CGFloat = CGFloat(M_PI)
+let π:CGFloat = CGFloat(Double.pi)
 
 @objc public enum Edge:Int{
   case top, bottom, left, right
@@ -72,8 +72,8 @@ extension CGPoint{
 }
 
 class DynamicItem:NSObject{
-  var center: CGPoint = CGPoint.zero
-  init(center:CGPoint) {
+  @objc var center: CGPoint = CGPoint.zero
+  @objc init(center:CGPoint) {
     self.center = center
     super.init()
     self.m_defineCustomProperty("center", getter: { [weak self] values in

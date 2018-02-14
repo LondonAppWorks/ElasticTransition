@@ -45,7 +45,7 @@ public extension NSObject{
   }
   
   // define custom animatable property
-  func m_setValues(_ values:[CGFloat], forCustomProperty key:String){
+  @objc func m_setValues(_ values:[CGFloat], forCustomProperty key:String){
     getPropertyState(key).setValues(values)
   }
   func m_defineCustomProperty<T:MotionAnimatableProperty>(_ key:String, initialValues:T, valueUpdateCallback:@escaping (T)->Void){
@@ -63,7 +63,7 @@ public extension NSObject{
     }
     m_propertyStates[key] = MotionAnimationPropertyState(getter: getter, setter: setter)
   }
-  func m_removeAnimationForKey(_ key:String){
+  @objc func m_removeAnimationForKey(_ key:String){
     getPropertyState(key).stop()
   }
   
@@ -78,11 +78,11 @@ public extension NSObject{
       velocityUpdateCallback(T.fromCGFloatValues(values))
     })
   }
-  func m_removeCallback(_ key:String, observerKey:MotionAnimationObserverKey){
+  @objc func m_removeCallback(_ key:String, observerKey:MotionAnimationObserverKey){
     let _ = getPropertyState(key).removeCallback(observerKey)
   }
   
-  func m_isAnimating(_ key:String) -> Bool{
+  @objc func m_isAnimating(_ key:String) -> Bool{
     return getPropertyState(key).animation?.playing ?? false
   }
   

@@ -9,11 +9,11 @@
 import UIKit
 
 class ElasticTransitionPresentationController:UIPresentationController,UIAdaptivePresentationControllerDelegate {
-    weak var transition:ElasticTransition?
+    @objc weak var transition:ElasticTransition?
 
-    var overlayView = UIView()
-    var shadowView = UIView()
-    var shadowMaskLayer = ElasticShapeLayer()
+    @objc var overlayView = UIView()
+    @objc var shadowView = UIView()
+    @objc var shadowMaskLayer = ElasticShapeLayer()
 
     override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
         super.init(presentedViewController:presentedViewController, presenting:presentingViewController)
@@ -29,7 +29,7 @@ class ElasticTransitionPresentationController:UIPresentationController,UIAdaptiv
         shadowView.layer.zPosition = 299
     }
 
-    func overlayTapped(_ tapGR:UITapGestureRecognizer){
+    @objc func overlayTapped(_ tapGR:UITapGestureRecognizer){
         if let delegate = presentedViewController as? ElasticMenuTransitionDelegate {
             let touchToDismiss = delegate.dismissByBackgroundTouch ?? false
             if touchToDismiss{
@@ -58,7 +58,7 @@ class ElasticTransitionPresentationController:UIPresentationController,UIAdaptiv
         }
     }
 
-    func hidePresentingViewIfCovered(){
+    @objc func hidePresentingViewIfCovered(){
         if let containerBounds = containerView?.bounds {
             let size = self.size(forChildContentContainer: presentedViewController, withParentContainerSize: containerBounds.size)
             if size == containerBounds.size{
@@ -113,7 +113,7 @@ class ElasticTransitionPresentationController:UIPresentationController,UIAdaptiv
     }
 
 
-    func updateShadow(_ progress:CGFloat){
+    @objc func updateShadow(_ progress:CGFloat){
         if let transition = transition , transition.showShadow{
             shadowView.layer.shadowColor = transition.shadowColor.cgColor
             shadowView.layer.shadowRadius = transition.shadowRadius

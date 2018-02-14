@@ -10,9 +10,9 @@ import UIKit
 
 
 open class SpringValueAnimation:ValueAnimation {
-  open var threshold:CGFloat = 0.001
-  open var stiffness:CGFloat = 150
-  open var damping:CGFloat = 10
+  @objc open var threshold:CGFloat = 0.001
+  @objc open var stiffness:CGFloat = 150
+  @objc open var damping:CGFloat = 10
 
   //from https://github.com/chenglou/react-motion
   open override func update(_ dt:CGFloat) -> Bool{

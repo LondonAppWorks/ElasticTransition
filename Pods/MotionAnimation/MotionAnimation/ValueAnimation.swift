@@ -13,9 +13,9 @@ public typealias CGFloatValueBlock = ((inout [CGFloat]) -> Void)
 open class ValueAnimation:MotionAnimation {
   private var getter:CGFloatValueBlock
   private var setter:CGFloatValueBlock
-  public var velocity:[CGFloat]
-  public var values:[CGFloat]
-  public var target:[CGFloat]{
+  @objc public var velocity:[CGFloat]
+  @objc public var values:[CGFloat]
+  @objc public var target:[CGFloat]{
     didSet{
       getter(&values)
       if target != values{

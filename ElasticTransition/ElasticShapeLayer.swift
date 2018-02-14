@@ -29,18 +29,18 @@ import UIKit
 
 
 public class ElasticShapeLayer: CAShapeLayer {
-  public var edge:Edge = .bottom{
+  @objc public var edge:Edge = .bottom{
     didSet{
       path = currentPath()
     }
   }
-  public var dragPoint:CGPoint = CGPoint.zero{
+  @objc public var dragPoint:CGPoint = CGPoint.zero{
     didSet{
       path = currentPath()
     }
   }
   
-  public var radiusFactor:CGFloat = 0.25{
+  @objc public var radiusFactor:CGFloat = 0.25{
     didSet{
       if radiusFactor < 0{
         radiusFactor = 0

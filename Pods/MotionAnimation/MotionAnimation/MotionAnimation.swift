@@ -14,45 +14,45 @@ public protocol MotionAnimationDelegate:class {
 }
 
 open class MotionAnimation: NSObject {
-  internal var animator:MotionAnimator?
+  @objc internal var animator:MotionAnimator?
 
   weak open var delegate:MotionAnimationDelegate?
-  open var onCompletion:((_ animation:MotionAnimation) -> Void)?
-  open var onUpdate:((_ animation:MotionAnimation) -> Void)?
-  open var willStartPlaying:(()->Void)? = nil
+  @objc open var onCompletion:((_ animation:MotionAnimation) -> Void)?
+  @objc open var onUpdate:((_ animation:MotionAnimation) -> Void)?
+  @objc open var willStartPlaying:(()->Void)? = nil
 
-  open var playing:Bool {
+  @objc open var playing:Bool {
     return animator != nil
   }
 
-  public init(playImmediately:Bool = true) {
+  @objc public init(playImmediately:Bool = true) {
     super.init()
     if playImmediately { play() }
   }
 
-  open func play(){
+  @objc open func play(){
     if !playing{
       willStartPlaying?()
       MotionAnimator.sharedInstance.addAnimation(self)
     }
   }
 
-  open func stop(){
+  @objc open func stop(){
     MotionAnimator.sharedInstance.removeAnimation(self)
   }
   
   
   
   // override point for subclass
-  open func willUpdate() {}
+  @objc open func willUpdate() {}
   
   // returning true means require next update(not yet reached target state)
   // behaviors can call animator.addAnimation to wake up the animator when
   // the target value changed
-  open func update(_ dt:CGFloat) -> Bool{
+  @objc open func update(_ dt:CGFloat) -> Bool{
     return false
   }
   
   // this will be called on main thread. sync value back to the animated object
-  open func didUpdate(){}
+  @objc open func didUpdate(){}
 }

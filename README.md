@@ -1,4 +1,6 @@
-# ElasticTransition (Swift 3)
+# ElasticTransition (Swift 4)
+
+⚠️  This is a fork of the original cocoapod by https://github.com/lkzhao with support of Swift 4
 
 [![Version](https://img.shields.io/cocoapods/v/ElasticTransition.svg?style=flat)](http://cocoapods.org/pods/ElasticTransition)
 [![License](https://img.shields.io/cocoapods/l/ElasticTransition.svg?style=flat)](http://cocoapods.org/pods/ElasticTransition)

@@ -13,7 +13,7 @@ open class ElasticModalViewController: UIViewController, ElasticMenuTransitionDe
   public var dragDownTransformType:ElasticTransitionBackgroundTransform = .subtle
   public var dragRightTransformType:ElasticTransitionBackgroundTransform = .translatePull
   
-  lazy var modalTransition:ElasticTransition = {
+  @objc lazy var modalTransition:ElasticTransition = {
     let transition = ElasticTransition()
     transition.edge = .bottom
     transition.sticky = true
@@ -27,7 +27,7 @@ open class ElasticModalViewController: UIViewController, ElasticMenuTransitionDe
     return modalTransition.edge == .bottom
   }
 
-  let leftDissmissPanGestureRecognizer = UIScreenEdgePanGestureRecognizer()
+  @objc let leftDissmissPanGestureRecognizer = UIScreenEdgePanGestureRecognizer()
   
 
   public init(){
@@ -63,21 +63,21 @@ open class ElasticModalViewController: UIViewController, ElasticMenuTransitionDe
     modalTransition.transformType = dragDownTransformType
   }
   
-  public func dismissFromTop(_ sender:UIView?){
+  @objc public func dismissFromTop(_ sender:UIView?){
     modalTransition.edge = .bottom
     modalTransition.transformType = dragDownTransformType
     modalTransition.startingPoint = sender?.center
     dismiss(animated: true, completion: nil)
   }
   
-  public func dismissFromLeft(_ sender:UIView?){
+  @objc public func dismissFromLeft(_ sender:UIView?){
     modalTransition.transformType = dragRightTransformType
     modalTransition.edge = .right
     modalTransition.startingPoint = sender?.center
     dismiss(animated: true, completion: nil)
   }
   
-  public func handleLeftPan(_ pan:UIPanGestureRecognizer){
+  @objc public func handleLeftPan(_ pan:UIPanGestureRecognizer){
     if pan.state == .began{
       modalTransition.transformType = dragRightTransformType
       modalTransition.edge = .right
