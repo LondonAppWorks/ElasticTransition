@@ -1,3 +1,3 @@
-platform :ios, "8.0"
+platform :ios, "10.3"
 use_frameworks!
-pod "MotionAnimation", :git => 'https://github.com/lkzhao/MotionAnimation.git', :branch => 'swift3'
+pod "MotionAnimation", :git => 'https://github.com/LondonAppWorks/MotionAnimation.git'
